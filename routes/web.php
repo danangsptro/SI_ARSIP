@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function(){
     Route::get('/', 'backend\dashboardController@index');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
