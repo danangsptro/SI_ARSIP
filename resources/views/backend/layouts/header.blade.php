@@ -16,20 +16,20 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle" src="{{asset('assets/img/adminnn.png')}}" alt="User Avatar">
-                    {{-- <span style="margin-right: 1rem;">{{ Auth::user()->name }}</span> --}}
+                    <span style="margin-right: 1rem;">{{ Auth::user()->name }}</span>
                     </a>
                     <div class="user-menu dropdown-menu">
                       <a class="nav-link" href=""><i class="fa fa-user"></i> My Profile</a>
 
-                      {{-- <a class="nav-link" href="{{ route('logout') }}"
+                      <a class="nav-link" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
                           {{ __('Logout') }}
-                      </a> --}}
+                      </a>
 
-                      {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                           @csrf
-                      </form> --}}
+                      </form>
                   </div>
                 </div>
 
