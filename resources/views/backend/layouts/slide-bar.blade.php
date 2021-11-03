@@ -22,6 +22,7 @@
                 </li> --}}
                 <h3 class="menu-title">UI elements</h3>
 
+                @if (Auth::user()->user_role == 'Staff')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Data</a>
@@ -41,6 +42,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
 
                 <h3 class="menu-title">Data</h3>
 

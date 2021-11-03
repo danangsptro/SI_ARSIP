@@ -14,10 +14,10 @@ class AddDataPersonalToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('user_role')->nullable()->after('name');
+            $table->string('user_role')->nullable()->after('name')->default('Masyarakat');
             $table->string('gender')->nullable()->after('user_role');
             $table->char('telepon')->nullable()->after('gender');
-            $table->text('adddress')->nullable()->after('telepon');
+            $table->text('address')->nullable()->after('telepon');
         });
     }
 
