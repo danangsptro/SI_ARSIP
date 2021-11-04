@@ -14,6 +14,11 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('dashboard')->group(function(){
         Route::get('/admin', 'backend\dashboardController@index');
+        // Jenis Pengajuan
+        Route::get('/jenisPengajuan', 'backend\jenisPengajuanController@index')->name('pengajuan');
+        Route::get('/createPengajuan', 'backend\jenisPengajuanController@create')->name('createPengajuan');
+        Route::post('/storePengajuan', 'backend\jenisPengajuanController@store')->name('storePengajuan');
+        Route::delete('/deletePengajuan/{id}', 'backend\jenisPengajuanController@destroy')->name('deletePengajuan');
     });
 });
 

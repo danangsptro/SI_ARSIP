@@ -38,7 +38,7 @@
                                 Imunisasi</a>
                         </li> --}}
                         <li>
-                            <i class="fa fa-table"></i><a href="#">Testing</a>
+                            <i class="fa fa-table"></i><a href="{{route('pengajuan')}}">Arsip</a>
                         </li>
                     </ul>
                 </li>
