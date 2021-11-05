@@ -32,7 +32,7 @@
 
 <body>
 
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
 
     @include('backend.layouts.slide-bar')
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Model\jenis_pengajuan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class jenisPengajuanController extends Controller
 {
@@ -29,9 +31,12 @@ class jenisPengajuanController extends Controller
         $pengajuan->save();
 
         if ($pengajuan) {
-            return redirect()->route('pengajuan')->with('success', 'Data berhasil ditambahkan');
+            toast("Data $pengajuan->nama Success Create Data", 'success');
+            return redirect()->route('pengajuan');
         }else{
-            return redirect()->route('pengajuan')->with('error', 'Data gagal ditambahkan');
+            toast("Data $pengajuan->nama Error Create Data", 'eror');
+            return redirect()->route('pengajuan');
+
         }
     }
 
@@ -41,9 +46,11 @@ class jenisPengajuanController extends Controller
         $pengajuan->delete();
 
         if ($pengajuan != null) {
-            return redirect()->route('pengajuan')->with('success', 'Data berhasil dihapus');
+            toast("Data $pengajuan->nama Success Delete", 'success');
+            return redirect()->route('pengajuan');
         }else{
-            return redirect()->route('pengajuan')->with('error', 'Data gagal dihapus');
+            toast("Data $pengajuan->nama Error Delete", 'eror');
+            return redirect()->route('pengajuan');
         }
 
     }
