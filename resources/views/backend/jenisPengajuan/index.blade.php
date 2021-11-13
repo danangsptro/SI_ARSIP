@@ -10,7 +10,9 @@
     <div class="container-fluid">
         <a href="" class="btn btn-primary" style="border-radius: 5rem">Kembali Halaman
             Admin</a>
-        <a href="{{ route('createPengajuan') }}" class="btn btn-warning" style="border-radius: 5rem">Tambah Data</a>
+        @if (Auth::user()->user_role != 'Lurah')
+            <a href="{{ route('createPengajuan') }}" class="btn btn-warning" style="border-radius: 5rem">Tambah Data</a>
+        @endif
         <br><br>
 
         <div class="card">
@@ -21,27 +23,33 @@
                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered ftd">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col">#</th>
+                            <th scope="col">No index</th>
                             <th scope="col">Jenis Pengajuan</th>
-                            <th scope="col">Action</th>
+                            @if (Auth::user()->user_role != 'Lurah')
+                                <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pengajuan as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $d->no_index }}</td>
                                 <td>{{ $d->nama }}</td>
-                                <td>
-                                    <a href="" class="btn btn-warning"
-                                        style="border-radius: 5rem">EDIT</a>
-                                    <form action="{{route('deletePengajuan', $d->id)}}" class="d-inline" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"
-                                            onclick="return confirm('ANDA YAKIN INGIN MENGHAPUS ?')"
-                                            style="border-radius: 5rem">HAPUS</button>
-                                    </form>
-                                </td>
+                                @if (Auth::user()->user_role != 'Lurah')
+                                    <td>
+                                        <a href="{{ route('editPengajuan', $d->id) }}" class="btn btn-warning"
+                                            style="border-radius: 5rem">EDIT</a>
+                                        <form action="{{route('deletePengajuan', $d->id)}}" class="d-inline" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"
+                                                onclick="return confirm('ANDA YAKIN INGIN MENGHAPUS ?')"
+                                                style="border-radius: 5rem">HAPUS</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

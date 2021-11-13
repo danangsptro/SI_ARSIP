@@ -10,6 +10,13 @@
         <form action="{{route('storePengajuan')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="no_index"><strong>No Index</strong></label>
+                <input type="text" class="form-control" name="no_index">
+                @error('no_index')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="nama"><strong>Jenis Pengajuan</strong></label>
                 <input type="text" class="form-control" name="nama">
                 @error('nama')

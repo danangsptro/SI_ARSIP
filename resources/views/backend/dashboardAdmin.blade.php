@@ -22,9 +22,23 @@
                 </div>
             </div>
         </div>
-        <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
-            <h3><i><strong>WELCOME TO DASHBOARD </strong></i></h3>
-        </marquee>
+        @if (Auth::user()->user_role === 'Lurah')
+            <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
+                <h3><i><strong>WELCOME TO DASHBOARD LURAH</strong></i></h3>
+            </marquee>
+        @else
+            @if (Auth::user()->user_role === 'Staff')
+                <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
+                    <h3><i><strong>WELCOME TO DASHBOARD STAFF</strong></i></h3>
+                </marquee>
+            @else
+                @if (Auth::user()->user_role === 'Masyarakat')
+                    <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
+                        <h3><i><strong>WELCOME TO DASHBOARD FORM PENGAJUAN SURAT</strong></i></h3>
+                    </marquee>
+                @endif
+            @endif
+        @endif
         <div class="row">
             <div class="col-lg-12">
                 <div class="content mt-1">
@@ -46,9 +60,9 @@
                         <div class="card-body" style="background-color: #2ddff3;">
                             <div class="clearfix">
                                 <div class="float-right">
-                                    <p class="mb-0 text-right"><strong>Data </strong></p>
+                                    <p class="mb-0 text-right"><strong>Jenis Surat </strong></p>
                                     <div class="container-fluid">
-                                        {{-- <h3 class="text-right">{{ $balita->count() }}</h3> --}}
+                                        <h3 class="text-right">{{ $jenisPengajuan->count() }}</h3>
                                     </div>
                                 </div>
                             </div>

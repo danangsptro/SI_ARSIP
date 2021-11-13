@@ -13,7 +13,7 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href=""> <i class="menu-icon fa fa-dashboard"></i>Dashboard
+                    <a href="{{route('dashboard')}}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard
                     </a>
                 </li>
                 {{-- <li>
@@ -27,18 +27,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Data</a>
                     <ul class="sub-menu children dropdown-menu">
-                        {{-- <li>
-                            <i class="fa fa-table"></i><a href="{{ route('index-balita') }}">Balita</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-table"></i><a href="{{ route('index-checkUp') }}">Check Up</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-table"></i><a href="{{ route('index-jenisImunisasi') }}">Jenis
-                                Imunisasi</a>
-                        </li> --}}
                         <li>
                             <i class="fa fa-table"></i><a href="{{route('pengajuan')}}">Arsip</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-table"></i><a href="">Approve</a>
                         </li>
                     </ul>
                 </li>
@@ -48,10 +41,10 @@
 
                 <li class="menu-item-has-children dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Profil</a>
+                        aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Request</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li>
-                            <i class="fa fa-table"></i><a href="">Testing</a>
+                            <i class="fa fa-table"></i><a href="{{route('pengajuanSurat')}}">Pengajuan Surat</a>
                         </li>
                     </ul>
                 </li>

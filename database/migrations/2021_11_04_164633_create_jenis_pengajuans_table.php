@@ -15,6 +15,7 @@ class CreateJenisPengajuansTable extends Migration
     {
         Schema::create('jenis_pengajuans', function (Blueprint $table) {
             $table->id();
+            $table->string('no_index');
             $table->string('nama');
             $table->timestamps();
         });
