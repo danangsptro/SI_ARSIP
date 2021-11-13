@@ -8,7 +8,7 @@
     <h1 id="ftd">Table Pengajuan Surat</h1>
     <br>
     <div class="container-fluid">
-        <a href="{{route('dashboard')}}" class="btn btn-primary" style="border-radius: 5rem">Kembali Halaman
+        <a href="{{ route('dashboard') }}" class="btn btn-primary" style="border-radius: 5rem">Kembali Halaman
             Admin</a>
         @if (Auth::user()->user_role === 'Masyarakat')
             <a href="{{ route('createSurat') }}" class="btn btn-warning" style="border-radius: 5rem">Tambah Data</a>
@@ -73,16 +73,16 @@
                                                     style="border-radius: 5rem">HAPUS</button>
                                             </form>
                                         @else
-                                            @if (Auth::user()->user_role === 'Staff')
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option>Belum Disetujui</option>
-                                                        <option>Belum Disetujui</option>
-                                                    </select>
-                                                </td>
-                                            @endif
                                             <span class="badge badge-pill badge-success">Surat sudah di approve!</span>
                                         @endif
+                                    </td>
+                                @endif
+                                @if (Auth::user()->user_role === 'Staff')
+                                    <td>
+                                        <select class="form-control">
+                                            <option>Setujui</option>
+                                            <option>Belum Disetujui</option>
+                                        </select>
                                     </td>
                                 @endif
                             </tr>
