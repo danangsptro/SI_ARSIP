@@ -33,7 +33,10 @@
                 </li>
 
                 <h3 class="menu-title">Data</h3>
-
+                <li>
+                    <a href="{{route('dataUser')}}"> <i class="menu-icon fa fa-user"></i>Data User
+                    </a>
+                </li>
                 @if (Auth::user()->user_role != 'sekdes')
                     <li>
                         <a href="{{ route('pengajuanSurat') }}"> <i class="menu-icon fa fa-folder"></i>Tambah Arsip

@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Laporan
         Route::get('/laporan', 'backend\laporanController@index')->name('laporan');
         Route::get('/laporan/{id}', 'backend\laporanController@show')->name('laporanShow');
+        // Data User
+        Route::get('/dataUser', 'backend\dashboardController@dataUser')->name('dataUser');
     });
 });
 
