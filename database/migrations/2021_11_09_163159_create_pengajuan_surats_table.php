@@ -16,14 +16,15 @@ class CreatePengajuanSuratsTable extends Migration
         Schema::create('pengajuan_surats', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('index_id')->unsigned();
-            $table->date('tanggal_pengajuan');
             $table->string('nama');
-            $table->string('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
-            $table->string('pekerjaan');
             $table->string('agama');
+            $table->string('pekerjaan');
+            $table->date('tanggal_masuk');
             $table->string('alamat');
-            $table->string('status_surat')->nullable()->default('Belum Disetujui');
+            $table->string('perihal');
+            $table->string('file');
             $table->timestamps();
 
             $table->foreign('index_id')->references('id')->on('jenis_pengajuans')->onDelete('cascade');

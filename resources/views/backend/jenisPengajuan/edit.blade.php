@@ -1,11 +1,11 @@
 @extends('backend.masterbackend')
-@section('title', 'ARSIP | EDIT-JENIS PENGAJUAN')
+@section('title', 'ARSIP | EDIT-KODE SURAT')
 
 
 @section('backend')
     <div class="container mt-3">
         <br>
-        <h1 id="ftd">Edit Jenis Pengajuan</h1>
+        <h1 id="ftd">Edit Kode Surat</h1>
         <br>
         <form action="{{ route('updateStore', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

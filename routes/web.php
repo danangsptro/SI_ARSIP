@@ -26,7 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/createSurat', 'backend\pengajuanSuratController@create')->name('createSurat');
         Route::post('/storeSurat', 'backend\pengajuanSuratController@store')->name('storeSurat');
         Route::get('/editSurat/{id}', 'backend\pengajuanSuratController@edit')->name('editSurat');
+        Route::post('/updateSurat', 'backend\pengajuanSuratController@update')->name('updateSurat');
         Route::delete('/deleteSurat/{id}', 'backend\pengajuanSuratController@destroy')->name('deleteSurat');
+        // Laporan
+        Route::get('/laporan', 'backend\laporanController@index')->name('laporan');
+        Route::get('/laporan/{id}', 'backend\laporanController@show')->name('laporanShow');
     });
 });
 

@@ -7,6 +7,8 @@ use App\Http\Model\jenis_pengajuan;
 use App\Http\Model\pengajuanSurat;
 use Dotenv\Result\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\If_;
 
 class pengajuanSuratController extends Controller
 {
@@ -25,25 +27,37 @@ class pengajuanSuratController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'index_id'          => 'required|min:1',
-            'tanggal_pengajuan' => 'required|min:1',
-            'nama'              => 'required|min:1',
-            'tanggal_lahir'     => 'required|min:1',
-            'jenis_kelamin'     => 'required|min:1',
-            'pekerjaan'         => 'required|min:1',
-            'agama'             => 'required|min:1',
-            'alamat'            => 'required|min:1',
+            'index_id'        => 'required|min:1',
+            'nama'            => 'required|min:1',
+            'tanggal_lahir'   => 'required|min:1',
+            'jenis_kelamin'   => 'required|min:1',
+            'agama'           => 'required|min:1',
+            'pekerjaan'       => 'required|min:1',
+            'tanggal_masuk'   => 'required|min:1',
+            'alamat'          => 'required|min:1',
+            'perihal'         => 'required|min:1',
+            'file'            => 'mimes:png,jpg,jpeg'
         ]);
 
         $pengajuan = new pengajuanSurat;
         $pengajuan->index_id = $validate['index_id'];
-        $pengajuan->tanggal_pengajuan = $validate['tanggal_pengajuan'];
         $pengajuan->nama = $validate['nama'];
         $pengajuan->tanggal_lahir = $validate['tanggal_lahir'];
         $pengajuan->jenis_kelamin = $validate['jenis_kelamin'];
-        $pengajuan->pekerjaan = $validate['pekerjaan'];
         $pengajuan->agama = $validate['agama'];
+        $pengajuan->pekerjaan = $validate['pekerjaan'];
+        $pengajuan->tanggal_masuk = $validate['tanggal_masuk'];
         $pengajuan->alamat = $validate['alamat'];
+        $pengajuan->perihal = $validate['perihal'];
+        if(!$request->file){
+            $pengajuan->file = 'default.png';
+        }else{
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $request->file('file')->move("storage/data", $fileName);
+            $pengajuan->file = $fileName;
+        }
+        // dd($pengajuan);
         $pengajuan->save();
 
         if ($pengajuan) {
@@ -62,11 +76,50 @@ class pengajuanSuratController extends Controller
         return view('backend.pengajuanSurat.edit', compact('pengajuan', 'jenisPengajuan'));
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            'index_id'        => 'required|min:1',
+            'tanggal_masuk'   => 'required|min:1',
+            'tanggal_selesai' => 'required|min:1',
+            'asal'            => 'required|min:1',
+            'perihal'         => 'required|min:1',
+            'file'            => 'mimes:png,jpg,jpeg'
+        ]);
+
+        $id = $request->id;
+        $jenisPengajuan = pengajuanSurat::find($id);
+
+        if($jenisPengajuan != null){
+            $jenisPengajuan->update([
+                'index_id' => $request->index_id,
+                'tanggal_masuk' => $request->tanggal_masuk,
+                'tanggal_selesai' => $request->tanggal_selesai,
+                'asal' => $request->asal,
+                'perihal' => $request->perihal,
+                'file' => $request->file ?  $request->file('file')->getClientOriginalName() : 'default.png'
+
+            ]);
+        }
+
+        If($jenisPengajuan != null){
+            toast("Data $jenisPengajuan->nama Success Update Data", 'success');
+            return redirect()->route('pengajuanSurat');
+        }else{
+            toast("Data $jenisPengajuan->nama Failed Update Data", 'error');
+            return redirect()->route('pengajuanSurat');
+        }
+    }
+
     public function destroy($id)
     {
         $pengajuan = pengajuanSurat::find($id);
-        $pengajuan->delete();
-
+        if ($pengajuan->file === null) {
+            $pengajuan->delete();
+        } else {
+            Storage::delete('public/data/' . $pengajuan->file);
+            $pengajuan->delete();
+        }
         if ($pengajuan) {
             toast("Data $pengajuan->nama Success Delete Data", 'success');
             return redirect()->route('pengajuanSurat');
@@ -75,12 +128,4 @@ class pengajuanSuratController extends Controller
             return redirect()->route('pengajuanSurat');
         }
     }
-
-    // public function active(Request $request, $id)
-    // {
-    //     $id = $request->id;
-    //     $active = pengajuanSurat::find($id);
-    //     $active->status = 'Active';
-    //     $active->save();
-    // }
 }

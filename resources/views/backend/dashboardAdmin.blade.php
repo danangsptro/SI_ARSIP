@@ -3,7 +3,7 @@
 
 @section('backend')
 
-    <div class="container-fluid">
+    <div class="container-fluid"s>
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -22,9 +22,9 @@
                 </div>
             </div>
         </div>
-        @if (Auth::user()->user_role === 'Lurah')
-            <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
-                <h3><i><strong>WELCOME TO DASHBOARD LURAH</strong></i></h3>
+        @if (Auth::user()->user_role === 'Admin')
+            <marquee behavior="" direction="" style="color: Green; font-family:Cambria;">
+                <h3><i><strong>WELCOME TO DASHBOARD ADMIN</strong></i></h3>
             </marquee>
         @else
             @if (Auth::user()->user_role === 'Staff')
@@ -32,10 +32,17 @@
                     <h3><i><strong>WELCOME TO DASHBOARD STAFF</strong></i></h3>
                 </marquee>
             @else
-                @if (Auth::user()->user_role === 'Masyarakat')
-                    <marquee behavior="" direction="" style="color: red; font-family:Cambria;">
-                        <h3><i><strong>WELCOME TO DASHBOARD FORM PENGAJUAN SURAT</strong></i></h3>
+                @if (Auth::user()->user_role === 'Kasubag')
+                    <marquee behavior="" direction="" style="color: Navy; font-family:Cambria;">
+                        <h3><i><strong>WELCOME TO DASHBOARD KASUBAG</strong></i></h3>
                     </marquee>
+                @endif
+
+                @if (Auth::user()->user_role === 'Sekcam/camat')
+                    <marquee behavior="" direction="" style="color: Black; font-family:Cambria;">
+                        <h3><i><strong>WELCOME TO DASHBOARD SEKCAM DAN CAMAT</strong></i></h3>
+                    </marquee>
+
                 @endif
             @endif
         @endif
@@ -53,11 +60,12 @@
                 </div>
             </div>
         </div>
-        @if (Auth::user()->user_role == 'Staff' || Auth::user()->user_role == 'Lurah')
+        @if (Auth::user()->user_role == 'Admin' || Auth::user()->user_role == 'Staff' || Auth::user()->user_role == 'Kasubag' || Auth::user()->user_role == 'Sekcam/camat')
             <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                @if (Auth::user()->user_role === 'Admin')
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                     <div class="card">
-                        <div class="card-body" style="background-color: #2ddff3;">
+                        <div class="card-body" style="background-color: #81eefa;">
                             <div class="clearfix">
                                 <div class="float-right">
                                     <p class="mb-0 text-right"><strong>Jenis Surat </strong></p>
@@ -76,17 +84,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                @endif
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                     <div class="card">
-                        <div class="card-body" style="background-color:  #2ddff3;">
+                        <div class="card-body" style="background-color:  #f5f0a9;">
                             <div class="clearfix">
                                 <div class="float-left">
                                     <i class="mdi mdi-receipt text-warning icon-lg"></i>
                                 </div>
                                 <div class="float-right">
-                                    <p class="mb-0 text-right"><strong>Jumlah</strong></p>
+                                    <p class="mb-0 text-right"><strong>Pengajuan Surat</strong></p>
                                     <div class="container-fluid">
-                                        {{-- <h3 class="text-right">{{ $jenisImunisasi->count() }}</h3> --}}
+                                        <h3 class="text-right">{{ $pengajuan->count() }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -96,54 +105,6 @@
                                     <path fill-rule="evenodd"
                                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                 </svg> &nbsp; Total seluruh
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body" style="background-color:  #2ddff3;">
-                            <div class="clearfix">
-                                <div class="float-left">
-                                    <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                                </div>
-                                <div class="float-right">
-                                    <p class="mb-0 text-right"><strong>Jumlah </strong></p>
-                                    <div class="container-fluid">
-                                        {{-- <h3 class="text-right">{{ $jenisVitamin->count() }}</h3> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-muted mt-3 mb-0">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
-                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                </svg> &nbsp; Total seluruh
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body" style="background-color:  #2ddff3;">
-                            <div class="clearfix">
-                                <div class="float-left">
-                                    <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                                </div>
-                                <div class="float-right">
-                                    <p class="mb-0 text-right"><strong>Total Laporan</strong></p>
-                                    <div class="container-fluid">
-                                        {{-- <h3 class="text-right">{{ $checkUp->count() }} </h3> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-muted mt-3 mb-0">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
-                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                </svg> &nbsp; Total seluruh laporan
                             </p>
                         </div>
                     </div>
