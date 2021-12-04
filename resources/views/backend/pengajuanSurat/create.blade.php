@@ -26,14 +26,14 @@
             @enderror
             <br><br>
             <div class="form-group">
-                <label for="nama"><strong>nama</strong></label>
+                <label for="nama"><strong>Nama</strong></label>
                 <input type="text" class="form-control" name="nama">
                 @error('nama')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="tanggal_lahir"><strong>tanggal_lahir</strong></label>
+                <label for="tanggal_lahir"><strong>Tanggal Lahir</strong></label>
                 <input type="date" class="form-control" name="tanggal_lahir" style="width: 180px">
                 @error('tanggal_lahir')
                     <div class="text-danger">{{ $message }}</div>
@@ -47,7 +47,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="agama"><strong>agama</strong></label>
+                <label for="agama"><strong>Agama</strong></label>
                 <input type="text" class="form-control" name="agama">
                 @error('agama')
                     <div class="text-danger">{{ $message }}</div>
@@ -69,7 +69,7 @@
             </div>
             {{-- Asal --}}
             <div class="form-group">
-                <label for="alamat"><strong>alamat</strong></label>
+                <label for="alamat"><strong>Alamat</strong></label>
                 <input type="text" class="form-control" name="alamat">
                 @error('alamat')
                     <div class="text-danger">{{ $message }}</div>

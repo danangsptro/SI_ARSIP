@@ -3,6 +3,18 @@
 
 
 @section('backend')
+
+    <style>
+        .img-file {
+            width: 90px;
+            height: 90px;
+            cursor: pointer;
+            border: 0.3rem solid #ddd;
+            box-shadow: #ddd 0px 0px 10px;
+        }
+
+    </style>
+
     <br>
     <br>
     <h1 id="ftd">Table Pengajuan Surat</h1>
@@ -63,9 +75,8 @@
                                     @if (!$d->file)
                                         <span class="badge badge-danger">Tidak Ada File</span>
                                     @else
-                                        <img src="{{ asset('storage/data/' . $d->file) }}" alt="Image Not Found"
-                                            width="80px" height="80px">
-
+                                        <img src="{{ asset('storage/data/' . $d->file) }}" data-toggle="modal"
+                                            data-target="#exampleModal{{$loop->iteration}}" alt="Image Not Found" class="img-file">
                                     @endif
                                 </td>
                                 <td>
@@ -81,6 +92,24 @@
                                     </form>
 
                                 </td>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{$loop->iteration}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" {{ $loop->iteration }}>
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel {{$loop->iteration}}">File Surat</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="{{ asset('storage/data/' . $d->file) }}"
+                                                    alt="Image Not Found" width="1000px" height="700px">
+                                            </div>
+                                        </div>
+                                    </div>
                             </tr>
                         @endforeach
                     </tbody>

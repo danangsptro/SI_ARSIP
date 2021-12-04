@@ -36,7 +36,7 @@ class pengajuanSuratController extends Controller
             'tanggal_masuk'   => 'required|min:1',
             'alamat'          => 'required|min:1',
             'perihal'         => 'required|min:1',
-            'file'            => 'mimes:png,jpg,jpeg'
+            'file'            => 'required|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $pengajuan = new pengajuanSurat;
@@ -80,11 +80,15 @@ class pengajuanSuratController extends Controller
     {
         $request->validate([
             'index_id'        => 'required|min:1',
+            'nama'            => 'required|min:1',
+            'tanggal_lahir'   => 'required|min:1',
+            'jenis_kelamin'   => 'required|min:1',
+            'agama'           => 'required|min:1',
+            'pekerjaan'       => 'required|min:1',
             'tanggal_masuk'   => 'required|min:1',
-            'tanggal_selesai' => 'required|min:1',
-            'asal'            => 'required|min:1',
+            'alamat'          => 'required|min:1',
             'perihal'         => 'required|min:1',
-            'file'            => 'mimes:png,jpg,jpeg'
+            'file'            => 'required|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $id = $request->id;
@@ -93,9 +97,13 @@ class pengajuanSuratController extends Controller
         if($jenisPengajuan != null){
             $jenisPengajuan->update([
                 'index_id' => $request->index_id,
+                'nama' => $request->nama,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'pekerjaan' => $request->pekerjaan,
                 'tanggal_masuk' => $request->tanggal_masuk,
-                'tanggal_selesai' => $request->tanggal_selesai,
-                'asal' => $request->asal,
+                'alamat' => $request->alamat,
                 'perihal' => $request->perihal,
                 'file' => $request->file ?  $request->file('file')->getClientOriginalName() : 'default.png'
 

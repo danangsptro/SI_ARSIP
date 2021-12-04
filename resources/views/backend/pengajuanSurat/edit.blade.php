@@ -27,6 +27,41 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="nama"><strong>Nama</strong></label>
+                <input type="text" class="form-control" name="nama" value="{{ $pengajuan->nama }}">
+                @error('nama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="tanggal_lahir"><strong>Tanggal Lahir</strong></label>
+                <input type="date" class="form-control" name="tanggal_lahir" value="{{ $pengajuan->tanggal_lahir }}">
+                @error('tanggal_lahir')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="jenis_kelamin"><strong>Jenis Kelamin</strong></label>
+                <input type="text" class="form-control" name="jenis_kelamin" value="{{ $pengajuan->jenis_kelamin }}">
+                @error('jenis_kelamin')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="agama"><strong>Agama</strong></label>
+                <input type="text" class="form-control" name="agama" value="{{ $pengajuan->agama }}">
+                @error('agama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="pekerjaan"><strong>Pekerjaan</strong></label>
+                <input type="text" class="form-control" name="pekerjaan" value="{{ $pengajuan->pekerjaan }}">
+                @error('pekerjaan')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="tanggal_masuk"><strong>Tanggal Masuk</strong></label>
                 <input type="date" class="form-control" name="tanggal_masuk" value="{{ $pengajuan->tanggal_masuk }}">
                 @error('tanggal_masuk')
@@ -34,16 +69,9 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="tanggal_selesai"><strong>Tanggal Selesai</strong></label>
-                <input type="date" class="form-control" name="tanggal_selesai" value="{{ $pengajuan->tanggal_selesai }}">
-                @error('tanggal_selesai')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="asal"><strong>Asal</strong></label>
-                <input type="text" class="form-control" name="asal" value="{{ $pengajuan->asal }}">
-                @error('asal')
+                <label for="alamat"><strong>Alamat</strong></label>
+                <input type="text" class="form-control" name="alamat" value="{{ $pengajuan->alamat }}">
+                @error('alamat')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
