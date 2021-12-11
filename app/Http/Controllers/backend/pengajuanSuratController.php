@@ -12,6 +12,13 @@ use PhpParser\Node\Stmt\If_;
 
 class pengajuanSuratController extends Controller
 {
+
+    public function pagePdf()
+    {
+        $pengajuan = pengajuanSurat::all();
+        return view('backend.pengajuanSurat.dataPrint', compact('pengajuan'));
+    }
+
     public function index()
     {
         $pengajuan = pengajuanSurat::all();

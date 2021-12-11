@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateStore', 'backend\jenisPengajuanController@update')->name('updateStore');
         Route::delete('/deletePengajuan/{id}', 'backend\jenisPengajuanController@destroy')->name('deletePengajuan');
         // Pengajuan Surat
+        Route::get('/printPengajuanSurat', 'backend\pengajuanSuratController@pagePdf')->name('pagePdf');
         Route::get('/pengajuanSurat', 'backend\pengajuanSuratController@index')->name('pengajuanSurat');
         Route::get('/createSurat', 'backend\pengajuanSuratController@create')->name('createSurat');
         Route::post('/storeSurat', 'backend\pengajuanSuratController@store')->name('storeSurat');
