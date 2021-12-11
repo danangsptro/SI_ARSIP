@@ -22,4 +22,13 @@ class laporanController extends Controller
         $pengajuan = $laporan->pengajuanSurat;
         return view('backend.laporan.show', compact('laporan', 'pengajuan', 'data'));
     }
+
+    public function print($id)
+    {
+        $data = pengajuanSurat::all();
+        $pdf = jenis_pengajuan::with('pengajuanSurat')->find($id);
+        $result = $pdf->pengajuanSurat;
+        return view('backend.laporan.cetak', compact('pdf', 'result', 'data'));
+    }
+
 }
