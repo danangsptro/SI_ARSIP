@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
             'name' => 'Kaur Umum',
             'user_role' => 'kaur_umum',
             'email' => 'kaurUmum@gmail.com',
-            'address' => 'Kota Tangerang',
             'password' => Hash::make('kaurumum123'),
         ]);
 
@@ -23,7 +22,6 @@ class UserSeeder extends Seeder
             'name' => 'Kaur Pelayanan',
             'user_role' => 'kaur_pelayanan',
             'email' => 'kaurPelayanan@gmail.com',
-            'address' => 'Kota Tangerang',
             'password' => Hash::make('kaurpelayanan123'),
         ]);
 
@@ -31,7 +29,6 @@ class UserSeeder extends Seeder
             'name' => 'sekdes',
             'user_role' => 'sekdes',
             'email' => 'sekdes@gmail.com',
-            'address' => 'Kota Tangerang',
             'password' => Hash::make('sekdes123')
         ]);
     }

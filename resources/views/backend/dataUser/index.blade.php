@@ -5,7 +5,7 @@
 @section('backend')
     <br>
     <br>
-    <h1 id="ftd">Table Data User</h1>
+    <h1 id="ftd">Seluruh Data User</h1>
     <br>
     <div class="container-fluid">
         <a href="{{route('dashboard')}}" class="btn btn-primary">Kembali Halaman

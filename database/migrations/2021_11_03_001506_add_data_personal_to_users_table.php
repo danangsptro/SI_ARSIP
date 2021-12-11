@@ -15,9 +15,6 @@ class AddDataPersonalToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('user_role')->nullable()->after('name')->default('Masyarakat');
-            $table->string('gender')->nullable()->after('user_role');
-            $table->char('telepon')->nullable()->after('gender');
-            $table->text('address')->nullable()->after('telepon');
         });
     }
 
@@ -30,9 +27,6 @@ class AddDataPersonalToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('user_role');
-            $table->dropColumn('gender');
-            $table->dropColumn('telepon');
-            $table->dropColumn('address');
         });
     }
 }
