@@ -40,7 +40,20 @@
             @endif
         @endif
         <div class="row">
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-4" style="padding: 3rem; background:indianred;">
+                <img src="{{ asset('assets/img/Lambang-Kabupaten-Tangerang.png') }}" width="200px" alt="">
+            </div> --}}
+            <div class="col-lg-4">
+                <div class="content mt-1">
+                    <div class="jumbotron jumbotron-fluid" style="background-color: rgb(160, 158, 33); border-radius:1rem">
+                        <div class="container-fluid" style=" text-align: center">
+                            <img src="{{ asset('assets/img/Lambang-Kabupaten-Tangerang.png') }}" width="130px" alt="">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
                 <div class="content mt-1">
                     <div class="jumbotron jumbotron-fluid" style="background-color: #331eab; border-radius:1rem">
                         <div class="container" style=" text-align: center; color:white;">

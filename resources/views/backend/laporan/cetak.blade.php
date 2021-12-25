@@ -10,6 +10,14 @@
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 
+<style>
+    .img-file {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+    }
+
+</style>
 <body>
     <table class="table table-sm">
         <br>
@@ -42,11 +50,10 @@
                     <td>{{ $d->alamat }}</td>
                     <td>{{ $d->perihal }}</td>
                     <td>
-                        @if (!$d->file)
-                            <span class="badge badge-danger">Tidak Ada File</span>
-                        @else
-                            <img src="{{ asset('storage/data/' . $d->file) }}" alt="Image Not Found" width="80px"
-                                height="80px">
+                        @if ($d->file)
+                            <img src="{{ Storage::url($d->file) ? asset('assets/img/logodoc.png') : asset('assets/img/logodoc.png') }}"
+                                data-toggle="modal" data-target="#exampleModal{{ $loop->iteration }}"
+                                alt="Image Not Found" class="img-file">
 
                         @endif
                     </td>

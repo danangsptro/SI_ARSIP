@@ -43,7 +43,7 @@ class pengajuanSuratController extends Controller
             'tanggal_masuk'   => 'required|min:1',
             'alamat'          => 'required|min:1',
             'perihal'         => 'required|min:1',
-            'file'            => 'required|mimes:jpeg,png,jpg|max:2048',
+            'file'            => 'required|mimes:pdf',
         ]);
 
         $pengajuan = new pengajuanSurat;
@@ -56,13 +56,11 @@ class pengajuanSuratController extends Controller
         $pengajuan->tanggal_masuk = $validate['tanggal_masuk'];
         $pengajuan->alamat = $validate['alamat'];
         $pengajuan->perihal = $validate['perihal'];
-        if(!$request->file){
-            $pengajuan->file = 'default.png';
-        }else{
-            $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
-            $request->file('file')->move("storage/data", $fileName);
-            $pengajuan->file = $fileName;
+        if(!$request->file) {
+            $pengajuan->file = $pengajuan->file;
+        } else {
+            $validasiData['file'] = $request->file('file')->store('asset/file-surat','public');
+            $pengajuan->file = $validasiData['file'];
         }
         // dd($pengajuan);
         $pengajuan->save();
@@ -76,9 +74,9 @@ class pengajuanSuratController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $pengajuan = pengajuanSurat::find($id);
+        $pengajuan = pengajuanSurat::where('id', $request->id)->first();
         $jenisPengajuan = jenis_pengajuan::all();
         return view('backend.pengajuanSurat.edit', compact('pengajuan', 'jenisPengajuan'));
     }
@@ -95,35 +93,61 @@ class pengajuanSuratController extends Controller
             'tanggal_masuk'   => 'required|min:1',
             'alamat'          => 'required|min:1',
             'perihal'         => 'required|min:1',
-            'file'            => 'required|mimes:jpeg,png,jpg|max:2048',
+            'file'            => 'required|mimes:pdf,string',
         ]);
 
         $id = $request->id;
-        $jenisPengajuan = pengajuanSurat::find($id);
+        $pengajuan = pengajuanSurat::find($id);
 
-        if($jenisPengajuan != null){
-            $jenisPengajuan->update([
-                'index_id' => $request->index_id,
-                'nama' => $request->nama,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'agama' => $request->agama,
-                'pekerjaan' => $request->pekerjaan,
-                'tanggal_masuk' => $request->tanggal_masuk,
-                'alamat' => $request->alamat,
-                'perihal' => $request->perihal,
-                'file' => $request->file ?  $request->file('file')->getClientOriginalName() : 'default.png'
-
-            ]);
+        if(!$id){
+            toast("Data $pengajuan->nama Failed Update Data", 'error');
+            return redirect()->route('pengajuanSurat');
+        } else {
+            $pengajuan->index_id = $request->index_id;
+            $pengajuan->nama = $request->nama;
+            $pengajuan->tanggal_lahir = $request->tanggal_lahir;
+            $pengajuan->jenis_kelamin = $request->jenis_kelamin;
+            $pengajuan->agama = $request->agama;
+            $pengajuan->pekerjaan = $request->pekerjaan;
+            $pengajuan->tanggal_masuk = $request->tanggal_masuk;
+            $pengajuan->alamat = $request->alamat;
+            $pengajuan->perihal = $request->perihal;
+            if(!$request->file) {
+                $pengajuan->file = $pengajuan->file;
+            } else if($request->file) {
+                $validasiData['file'] = $request->file('file')->store('asset/file-surat','public');
+                $pengajuan->file = $validasiData['file'];
+            }else {
+                toast("Data $pengajuan->nama Failed Update Data", 'error');
+                return redirect()->route('pengajuanSurat');
+            }
+            $pengajuan->save();
+            toast("Data $pengajuan->nama Success Update Data", 'success');
+            return redirect()->route('pengajuanSurat');
         }
 
-        If($jenisPengajuan != null){
-            toast("Data $jenisPengajuan->nama Success Update Data", 'success');
-            return redirect()->route('pengajuanSurat');
-        }else{
-            toast("Data $jenisPengajuan->nama Failed Update Data", 'error');
-            return redirect()->route('pengajuanSurat');
-        }
+
+        // if($request->file == null){
+        //     $pengajuan->file = $pengajuan->file;
+        // }elseif (Storage::url($pengajuan->file)){
+        //     Storage::delete('public/'.$pengajuan->file);
+        //     $pengajuan = $request->file('file')->store('asset/file-surat', 'public');
+        // }else{
+        //     $validate['file'] = $request->file('file')->store('asset/file-surat', 'public');
+        //     $pengajuan->file = $validate['file'];
+        // }
+        // // dd($pengajuan);
+
+
+        // $pengajuan->save();
+
+        // if($pengajuan != null){
+        //     toast("Data $pengajuan->nama Success Update Data", 'success');
+        //     return redirect()->route('pengajuanSurat');
+        // }else{
+        //     toast("Data $pengajuan->nama Failed Update Data", 'error');
+        //     return redirect()->route('pengajuanSurat');
+        // }
     }
 
     public function destroy($id)

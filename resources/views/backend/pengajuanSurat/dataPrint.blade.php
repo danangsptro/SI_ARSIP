@@ -11,12 +11,10 @@
 </head>
 <style>
     .img-file {
-        width: 90px;
-        height: 90px;
-        cursor: pointer;
-        border: 0.3rem solid #ddd;
-        box-shadow: #ddd 0px 0px 10px;
-    }
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
 
 </style>
 
@@ -56,12 +54,11 @@
                     <td>{{ $d->alamat }}</td>
                     <td>{{ $d->perihal }}</td>
                     <td>
-                        @if (!$d->file)
-                            <span class="badge badge-danger">Tidak Ada File</span>
-                        @else
-                            <img src="{{ asset('storage/data/' . $d->file) }}" data-toggle="modal"
-                                data-target="#exampleModal{{ $loop->iteration }}" alt="Image Not Found"
-                                class="img-file">
+                        @if ($d->file)
+                            <img src="{{ Storage::url($d->file) ? asset('assets/img/logodoc.png') : asset('assets/img/logodoc.png') }}"
+                                data-toggle="modal" data-target="#exampleModal{{ $loop->iteration }}"
+                                alt="Image Not Found" class="img-file">
+
                         @endif
                     </td>
                 </tr>

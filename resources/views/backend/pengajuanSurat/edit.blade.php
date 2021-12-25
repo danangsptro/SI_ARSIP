@@ -7,7 +7,7 @@
         <br>
         <h1 id="ftd">Edit Pengajuan Arsip</h1>
         <br>
-        <form action="{{ route('updateSurat', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('dashboard/updateSurat/'.$pengajuan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <input type="hidden" class="form-control" name="id" value="{{ $pengajuan->id }}">
@@ -84,12 +84,7 @@
             </div>
             <div class="form-group">
                 <label for="file"><strong>file</strong></label><br>
-                @if (!$pengajuan->file)
-                    <span>img not found</span>
-                @else
-                    <img src="{{ asset('storage/data/'.$pengajuan->file) }}" alt="Image Not Found" width="80px" height="80px">
-
-                @endif
+                <iframe src="{{ Storage::url($pengajuan->file) }}" width="500px" height="500px"></iframe>
                 <br><br>
                 <label for="logo_desa">Masukan File</label>
                 <div class="input-group">

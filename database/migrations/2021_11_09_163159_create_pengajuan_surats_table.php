@@ -24,7 +24,7 @@ class CreatePengajuanSuratsTable extends Migration
             $table->date('tanggal_masuk');
             $table->string('alamat');
             $table->string('perihal');
-            $table->string('file');
+            $table->text('file');
             $table->timestamps();
 
             $table->foreign('index_id')->references('id')->on('jenis_pengajuans')->onDelete('cascade');
