@@ -3,7 +3,12 @@
 
 @section('backend')
 
-    <div class="container-fluid" s>
+    <style>
+        .jumbotron-fluid{
+            border: 5px solid salmon;
+        }
+    </style>
+    <div class="container-fluid">
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -45,7 +50,7 @@
             </div> --}}
             <div class="col-lg-4">
                 <div class="content mt-1">
-                    <div class="jumbotron jumbotron-fluid" style="background-color: rgb(160, 158, 33); border-radius:1rem">
+                    <div class="jumbotron jumbotron-fluid" style="background-color: rgb(255, 255, 255); border-radius:1rem">
                         <div class="container-fluid" style=" text-align: center">
                             <img src="{{ asset('assets/img/Lambang-Kabupaten-Tangerang.png') }}" width="130px" alt="">
 
@@ -55,12 +60,12 @@
             </div>
             <div class="col-lg-8">
                 <div class="content mt-1">
-                    <div class="jumbotron jumbotron-fluid" style="background-color: #331eab; border-radius:1rem">
-                        <div class="container" style=" text-align: center; color:white;">
-                            <h1 class="display-4"><strong>Selamat Datang</strong></h1>
+                    <div class="jumbotron jumbotron-fluid" style="background-color: white; border-radius:1rem">
+                        <div class="container" style=" text-align: center; color:black;">
+                            <h1 class="display-4" style="font-size: 50px"><strong>Selamat Datang</strong></h1>
                             <br>
-                            <h3 class="display-5">Skripsi Dela</h3>
-                            <h3 class="display-5">Universitas Raharja</h3>
+                            <h1 class="display-4" style="font-size: 30px">Kantor</h1>
+                            <h1 class="display-4" style="font-size: 30px">Kepala Desa Karet</h1>
                         </div>
                     </div>
                 </div>
@@ -68,48 +73,31 @@
         </div>
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <div class="card">
-                    <div class="card-body" style="background-color: #81eefa;">
-                        <div class="clearfix">
-                            <div class="float-right">
-                                <p class="mb-0 text-right"><strong>Jenis Surat </strong></p>
-                                <div class="container-fluid">
-                                    <h3 class="text-right">{{ $jenisPengajuan->count() }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-muted mt-3 mb-0">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
-                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                            </svg> &nbsp; Total seluruh
-                        </p>
-                    </div>
+                <div class="social-box linkedin">
+                    <i class="fa fa-barcode"></i>
+                    <ul>
+                        <li>
+                            <span>Kode Surat</span>
+                        </li>
+                        <li>
+                            <span class="count" style="color: red">{{ $jenisPengajuan->count() }}</span>
+                            <span>Total</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                <div class="card">
-                    <div class="card-body" style="background-color:  #f5f0a9;">
-                        <div class="clearfix">
-                            <div class="float-left">
-                                <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                            </div>
-                            <div class="float-right">
-                                <p class="mb-0 text-right"><strong>Pengajuan Surat</strong></p>
-                                <div class="container-fluid">
-                                    <h3 class="text-right">{{ $pengajuan->count() }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-muted mt-3 mb-0">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle-fill"
-                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                            </svg> &nbsp; Total seluruh
-                        </p>
-                    </div>
+                <div class="social-box facebook">
+                    <i class="fa fa-book"></i>
+                    <ul>
+                        <li>
+                            <span>Arsip Surat</span>
+                        </li>
+                        <li>
+                            <span class="count" style="color: red">{{ $pengajuan->count() }}</span>
+                            <span>Total</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
