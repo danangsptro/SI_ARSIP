@@ -13,7 +13,7 @@
     </style>
     <br>
     <br>
-    <h1 id="ftd">Jenis {{ $laporan->nama }} </h1>
+    <h1 id="ftd">Jenis Laporan {{ $laporan->nama }} </h1>
     <br>
     <div class="container-fluid">
         <a href="{{ route('laporan') }}" class="btn btn-primary">Kembali</a>
@@ -25,7 +25,35 @@
                     d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
             </svg>
         </a>
-        <br><br>
+        <form action="{{ route('laporanShow', $laporan->id) }}" method="GET">
+            <div class="row mt-2">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">Start</span>
+                        <input type="date" class="form-control date" placeholder="yyyy-mm-dd"
+                            value="{{ Request::get('start') ? Request::get('start') : '' }}" name="start" />
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">End</span>
+                        <input type="date" class="form-control date" placeholder="yyyy-mm-dd"
+                            value="{{ Request::get('end') ? Request::get('end') : '' }}" name="end" />
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn btn-success" type="submit">Search</button>
+                    @if (Request::get('start') and Request::get('end'))
+                        <a href="{{ route('laporanShow', $laporan->id) }}" type="submit" class="btn btn-danger"
+                            style="margin-left: 0.5em">Clear filter</a>
+                    @endif
+                </div>
+
+            </div>
+        </form>
+
+        <br>
 
         <div class="card">
             <div class="card-header">

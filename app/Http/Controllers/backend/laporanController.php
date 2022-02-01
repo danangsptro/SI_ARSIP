@@ -15,11 +15,19 @@ class laporanController extends Controller
         return view('backend.laporan.index', compact('laporan'));
     }
 
-    public function show ($id)
+    public function show(Request $request, $id)
     {
         $data = pengajuanSurat::all();
         $laporan = jenis_pengajuan::with('pengajuanSurat')->find($id);
         $pengajuan = $laporan->pengajuanSurat;
+
+        $start = date("Y-m-d 00:00:00", strtotime($request->start));
+        $end = date("Y-m-d 23:59:59", strtotime($request->end));
+
+        if ($request->start && $request->end) {
+            $pengajuan = $pengajuan->whereBetween('created_at', [$start, $end]);
+        }
+
         return view('backend.laporan.show', compact('laporan', 'pengajuan', 'data'));
     }
 
@@ -30,5 +38,4 @@ class laporanController extends Controller
         $result = $pdf->pengajuanSurat;
         return view('backend.laporan.cetak', compact('pdf', 'result', 'data'));
     }
-
 }
