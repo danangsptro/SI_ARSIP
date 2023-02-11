@@ -38,4 +38,25 @@ class laporanController extends Controller
         $result = $pdf->pengajuanSurat;
         return view('backend.laporan.cetak', compact('pdf', 'result', 'data'));
     }
+
+    public function exportPdf(Request $request , $id)
+    {
+        $laporan = jenis_pengajuan::with('pengajuanSurat')->find($id);
+        $pengajuan = $laporan->pengajuanSurat;
+
+        $start = date("Y-m-d 00:00:00", strtotime($request->start));
+        $end = date("Y-m-d 23:59:59", strtotime($request->end));
+
+        if ($request->start && $request->end) {
+            $pengajuan = $pengajuan->whereBetween('created_at', [$start, $end]);
+        }
+        $pdf = app('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('backend.laporan.laporan', compact(
+            'laporan',
+            'pengajuan',
+        ));
+
+        return $pdf->stream("Laporan.pdf");
+    }
 }
